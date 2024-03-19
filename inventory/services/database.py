@@ -1,3 +1,4 @@
+from sqlalchemy import Engine, create_engine
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine, AsyncSession, async_sessionmaker
 
 from inventory.config import DataBaseConfig
@@ -13,6 +14,10 @@ class DataBaseService:
             f"postgresql+{self.__config.DB_DRIVER}://{self.__config.DB_USER}:{self.__config.DB_PASS}@"
             f"{self.__config.DB_HOST}:{self.__config.DB_PORT}/{self.__config.DB_NAME}")
         return self.__engine
+
+    def create_psycopg2_engine(self) -> Engine:
+        return create_engine(f"postgresql+psycopg2://{self.__config.DB_USER}:{self.__config.DB_PASS}@"
+                             f"{self.__config.DB_HOST}:{self.__config.DB_PORT}/{self.__config.DB_NAME}")
 
     def get_session(self):
         if self.__engine is None:

@@ -1,3 +1,4 @@
+from inventory.app import db_service
 from inventory.domain.interfaces.i_unit_of_work import IUnitOfWork
 from inventory.infrastructure.utils.repositories import ProductRepository, \
     CategoryRepository, SubCategoryRepository, CharacteristicRepository, \
@@ -6,7 +7,7 @@ from inventory.infrastructure.utils.repositories import ProductRepository, \
 
 class UnitOfWork(IUnitOfWork):
     def __init__(self):
-        self.session_factory = async_session_maker
+        self.session_factory = db_service.get_async_session_maker()
 
     async def __aenter__(self):
         self.session = self.session_factory()
