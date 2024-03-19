@@ -20,7 +20,7 @@ class CharacteristicOrm(Base):
     product: Mapped["ProductOrm"] = relationship(back_populates='characteristics')
 
     characteristic_type_id: Mapped[int] = mapped_column(ForeignKey('characteristic_types.id'))
-    characteristic_type: Mapped['CharacteristicTypeOrm'] = relationship()
+    characteristic_type: Mapped['CharacteristicTypeOrm'] = relationship(lazy='joined')
 
     def __repr__(self):
         return f"{self.characteristic_type.characteristic_name} - {self.value}"
