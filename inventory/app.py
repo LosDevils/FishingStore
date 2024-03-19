@@ -49,6 +49,7 @@ admin.add_view(CharacteristicTypeAdmin)
 # uvicorn inventory.app:app --reload
 # uvicornuvicorn inventory.app:app
 
+
 if __name__ == "__main__":
     # create_db(db_service.create_psycopg2_engine())
     uvicorn.run("app:app", reload=False)
